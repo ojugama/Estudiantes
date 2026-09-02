@@ -29,9 +29,7 @@ public class EstudianteController {
     public ResponseEntity<Estudiante> findById(
             @Parameter(description = "ID del estudiante a buscar.")
             @PathVariable Integer idEstudiante) {
-        return estudianteService.findById(idEstudiante)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(estudianteService.findById(idEstudiante));
     }
 
     @PostMapping
@@ -43,9 +41,7 @@ public class EstudianteController {
     @PutMapping
     @Operation(summary = "Actualiza un estudiante existente.")
     public ResponseEntity<Estudiante> update(@Valid @RequestBody Estudiante estudiante) {
-        return estudianteService.findById(estudiante.getIdEstudiante())
-                .map(e -> ResponseEntity.ok(estudianteService.update(estudiante)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(estudianteService.update(estudiante));
     }
 
     @DeleteMapping("/{idEstudiante}")
@@ -53,11 +49,6 @@ public class EstudianteController {
     public ResponseEntity<Estudiante> deleteById(
             @Parameter(description = "ID del estudiante a eliminar.")
             @PathVariable Integer idEstudiante) {
-        return estudianteService.findById(idEstudiante)
-                .map(e -> {
-                    estudianteService.deleteById(idEstudiante);
-                    return ResponseEntity.ok(e);
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(estudianteService.deleteById(idEstudiante));
     }
 }

@@ -8,11 +8,11 @@ import java.util.Optional;
 public interface IEstudianteService {
     List<Estudiante> findAll();
 
-    Optional<Estudiante> findById(Integer idEstudiante);
+    Estudiante findById(Integer idEstudiante);
 
     Estudiante create(Estudiante estudiante);
 
     Estudiante update(Estudiante estudiante);
 
-    void deleteById(Integer idEstudiante);
+    Estudiante deleteById(Integer idEstudiante);
 }

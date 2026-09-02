@@ -14,7 +14,7 @@ public class Estudiante {
     @NotBlank(message = "El número de documento es requerido.")
     @Size(min = 8, max = 11, message = "El número de documento debe tener entre 8 y 11 caracteres.")
     @Pattern(regexp = "^\\d*$", message = "El número de documento solo puede contener dígitos.")
-    @Column(name = "numero_documento", nullable = false, length = 11)
+    @Column(name = "numero_documento", nullable = false, length = 11, unique = true)
     private String numDocumento;
 
     @NotBlank(message = "El nombre es requerido.")
@@ -45,7 +45,7 @@ public class Estudiante {
     @Column(name = "carrera", nullable = false, length = 50)
     private String carrera;
 
-    @NotNull(message = "El promedio no puede ser nulo.")
+    @NotNull(message = "El promedio es requerido.")
     @PositiveOrZero(message = "El promedio debe ser un número positivo o cero.")
     @Max(value = 5, message = "El promedio no puede ser mayor a 5.")
     @Column(name = "promedio", nullable = false)

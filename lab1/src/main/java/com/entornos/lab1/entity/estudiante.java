@@ -1,82 +1,50 @@
 package com.entornos.lab1.entity;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
-import jakarta.persistence.*; // mapear tabla (tabla,id)  
-import jakarta.validation.constraints.*; // reglas de validacion caracteristicas (columnas)
-
-//lombok automatizar generacion de codigo
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
-@Table(name="Estudiantes")
+@Table(name = "Estudiantes")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class estudiante {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank
-    @Size(min=8,max=11,message="entre 8 a 11 caracteres")
-    public Long Cedula;
+    @NotBlank(message = "La cédula no puede estar vacía")
+    @Size(min = 8, max = 11, message = "La cédula debe tener entre 8 y 11 caracteres")
+    @Pattern(regexp = "^[0-9]+$", message = "La cédula debe contener solo números")
+    private String cedula;
 
-    @Column(nullable= false)
-    @NotBlank  /// no vacio 
-    @Pattern(regexp = "^\\S.*\\S$") /// impide estructura(no vacio al inicio ni final en la expresion puntual)
-    public String Nombre;
-    @Column(nullable= false)
-    @NotBlank  /// no vacio 
-    @Pattern(regexp = "^\\S.*\\S$") 
-    public String Apellidos;
-    @Email
-    public String Correo_electronico;
-    @Column(nullable= false)
-    @NotBlank  /// no vacio 
-    @Pattern(regexp = "^\\S.*\\S$") 
-    public String Carrera;
-    @NotNull
-    @Min(value = 0, message="nota >= 0")
-    @Max(value = 5 ,message="nota <=5")
-    public Double NotaPromedio;
-    
-    public Long getCedula() {
-        return Cedula;
-    }
-    public void setCedula(Long cedula) {
-        Cedula = cedula;
-    }
-    public String getNombre() {
-        return Nombre;
-    }
-    public void setNombre(String nombre) {
-        Nombre = nombre;
-    }
-    public String getApellidos() {
-        return Apellidos;
-    }
-    public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
-    }
-    public String getCorreo_electronico() {
-        return Correo_electronico;
-    }
-    public void setCorreo_electronico(String correo_electronico) {
-        Correo_electronico = correo_electronico;
-    }
-    public String getCarrera() {
-        return Carrera;
-    }
-    public void setCarrera(String carrera) {
-        Carrera = carrera;
-    }
-    public Double getNotaPromedio() {
-        return NotaPromedio;
-    }
-    public void setNotaPromedio(Double notaPromedio) {
-        NotaPromedio = notaPromedio;
-    }
+    @Column(nullable = false)
+    @NotBlank(message = "El nombre es obligatorio")
+    @Pattern(regexp = "^\\S.*\\S$", message = "No debe tener espacios al inicio ni al final")
+    private String nombre;
 
-    
+    @Column(nullable = false)
+    @NotBlank(message = "Los apellidos son obligatorios")
+    @Pattern(regexp = "^\\S.*\\S$", message = "No debe tener espacios al inicio ni al final")
+    private String apellidos;
 
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "El correo es obligatorio")
+    @Email(message = "Debe proporcionar un formato de correo válido")
+    private String correoElectronico;
 
+    private String direccion; // Campo opcional
+
+    @Column(nullable = false)
+    @NotBlank(message = "La carrera es obligatoria")
+    private String carrera;
+
+    @Column(nullable = false)
+    @NotNull(message = "La nota promedio es obligatoria")
+    @Min(value = 0, message = "La nota promedio debe ser como mínimo 0.0")
+    @Max(value = 5, message = "La nota promedio debe ser como máximo 5.0")
+    private Double notaPromedio;
 }

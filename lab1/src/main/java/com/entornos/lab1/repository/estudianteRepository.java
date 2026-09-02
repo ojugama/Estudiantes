@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface estudianteRepository extends JpaRepository<estudiante,Long>{
+public interface estudianteRepository extends JpaRepository<estudiante,String>{
     
     public List<estudiante> findByNombre(String nombre);
 }

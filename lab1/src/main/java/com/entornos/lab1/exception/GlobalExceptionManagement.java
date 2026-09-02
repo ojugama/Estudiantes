@@ -1,5 +1,5 @@
 package com.entornos.lab1.exception;
-
+import com.entornos.lab1.exception.EstudianteNoEncontradoException;
 import org.springframework.http.HttpStatus; 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
@@ -27,6 +27,11 @@ public class GlobalExceptionManagement {
     }
 
     //errores de negocio
-      
+    @ExceptionHandler(EstudianteNoEncontradoException.class)
+    public ResponseEntity<Map<String, String>> manejarEstudianteNoEncontrado(EstudianteNoEncontradoException ex) {
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+    }
 
 }

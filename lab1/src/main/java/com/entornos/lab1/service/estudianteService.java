@@ -19,7 +19,7 @@ public class estudianteService {
         return estudianteRepository.findAll();
     }
 
-    public Optional<estudiante> buscarEstudianteID(Long Cedula){
+    public Optional<estudiante> buscarEstudianteID(String Cedula){
         return estudianteRepository.findById(Cedula);
     }
 
@@ -27,7 +27,7 @@ public class estudianteService {
         estudianteRepository.save(estudiante);
     }
 
-    public void eliminarEstudiante(Long Cedula){
+    public void eliminarEstudiante(String Cedula){
         estudianteRepository.deleteById(Cedula);
     }
 

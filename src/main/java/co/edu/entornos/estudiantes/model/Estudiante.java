@@ -6,7 +6,6 @@ import jakarta.validation.constraints.*;
 @Entity
 @Table(name = "estudiantes")
 public class Estudiante {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

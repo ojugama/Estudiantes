@@ -48,8 +48,7 @@ public class Estudiante {
     @NotNull(message = "El promedio no puede ser nulo.")
     @PositiveOrZero(message = "El promedio debe ser un número positivo o cero.")
     @Max(value = 5, message = "El promedio no puede ser mayor a 5.")
-    @Digits(integer = 1, fraction = 2, message = "El promedio solo puede tener hasta 2 decimales.")
-    @Column(name = "promedio", nullable = false, length = 4)
+    @Column(name = "promedio", nullable = false)
     private Double promedio;
 
     public Estudiante() {
